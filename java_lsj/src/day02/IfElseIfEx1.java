@@ -1,0 +1,21 @@
+package day02;
+
+public class IfElseIfEx1 {
+
+	//if else if 예제
+	public static void main(String[] args) {
+		int num = -1;
+		
+		//num가 0이면 0이라고 출력, num가 양수이면 양수, num가 음수이면 음수라고 출력
+		//하는 코드를 작성
+		
+		if(num == 0) {
+			System.out.println("num : "  + num + " => 0입니다.");
+		}else if(num > 0) {
+			System.out.println("num : "  + num + " => 양수입니다.");
+		}else {
+			System.out.println("num : "  + num + " => 음수입니다.");
+		}
+	}
+
+}

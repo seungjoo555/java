@@ -47,7 +47,12 @@ public class HomeworkEx1 {
 		int menu;
 		int []r_Num = new int[3];
 		int count = 0;	//배열에 저장된 중복되지 않은 수의 개수
-		int topScore = 0;
+		int []topScore = new int[6];
+		String []name = new String[6];
+		
+		for(int i = 0; i < topScore.length; i++) {
+			topScore[i] = 100;
+		}
 		
 		do {
 			int score = 0;
@@ -74,25 +79,34 @@ public class HomeworkEx1 {
 						r_Num[count++] = r;
 					}
 				}
-				/*	랜덤 숫자 테스트용
+				//	랜덤 숫자 테스트용
 				for(int i = 0; i < 3; i++) {
 					System.out.print(r_Num[i] + " ");
 				}
-				*/
+				System.out.println();
+				
 					
 					
 					
 				while(true){
 					//사용자 입력 받기
 					int []user = new int[3];
+					count = 0;
 					System.out.print("입력 : ");
-					for(int i = 0; i < user.length; i++) {
-						user[i] = scan.nextInt();
-						if(user[i] > 9 || user[i] < 0) {
-							System.out.print("1~9사이의 숫자를 입력해 주세요.");
-							continue;
+					while(count < user.length) {
+						int input = scan.nextInt();
+						int i;
+						for(i = 0; i < count; i++) {
+							if(user[i] == input) {
+								break;
+							}
+						}
+						if(i == count) {
+							user[count++] = input;
 						}
 					}
+					score++;
+					
 					
 					
 					
@@ -130,20 +144,39 @@ public class HomeworkEx1 {
 						}
 					}
 					System.out.println();
-					score++;
+					
+					//3S가 되면 게임 끝
 					if(SBO[0] == 9) {
 						System.out.println("도전 횟수 : " + score);
-						if(topScore < score) {
-							topScore = score;
+						if(topScore[0] > score) {
+							topScore[5] = score;
 							System.out.println("현재 1등입니다. 이름을 기록하세요.");
-							scan.next().toString();
+							System.out.print("이름 : ");
+							name[5] = scan.next().toString();
+						}
+						for(int i = 0; i < topScore.length-1; i++) {
+							for(int j = 0; j < topScore.length-(1+i); j++) {
+								if(topScore[j] > topScore[j+1]) {
+									int tmp = topScore[j];
+									String tmp2 = name[j];
+									topScore[j] = topScore[j+1];
+									name[j] = name[j+1];
+									topScore[j+1] = tmp;
+									name[j+1] = tmp2;
+								}
+							}
 						}
 						break;
 					}
 				}
 			}
 			else if(menu == 2) {
-				
+				System.out.println(" -- 기록 -- ");
+				for(int i = 0; i < 5; i++) {
+					if(topScore[i] != 100) {
+						System.out.println((i+1)+ ". " + name[i] + " : " + topScore[i] + "회");
+					}
+				}
 			}
 		}while(menu != 3);
 		System.out.println("프로그램 종료");

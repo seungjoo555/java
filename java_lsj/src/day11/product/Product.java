@@ -1,9 +1,12 @@
 package day11.product;
 
+/* 중복된 제품명 x
+ * 
+ */
 public class Product {
 	//제품 이름, 재고개수, 판매개수, 가격, 제품 한개의 총판매가격
-	String name;
-	int count,s_count,price,totalprice;
+	private String name;
+	private int counts,s_count,price,totalprice;
 	
 	public String getName() {
 		return name;
@@ -12,10 +15,10 @@ public class Product {
 		this.name = name;
 	}
 	public int getCount() {
-		return count;
+		return counts;
 	}
 	public void setCount(int count) {
-		this.count = count;
+		this.counts = count;
 	}
 	public int getS_count() {
 		return s_count;
@@ -41,7 +44,7 @@ public class Product {
 	 */
 	public void printInfo() {
 		System.out.print(name + " - ");
-		System.out.print("재고개수 : " + count + " ");
+		System.out.print("재고개수 : " + counts + " ");
 		System.out.print("판매가격 : " + price + "\n");
 	}
 	
@@ -60,7 +63,7 @@ public class Product {
 	public Product(String name, int count, int price) {
 		super();
 		this.name = name;
-		this.count = count;
+		this.counts = count;
 		this.price = price;
 	}
 }

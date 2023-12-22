@@ -47,7 +47,7 @@ public class Word {
 	 * @return 주어진 word와 내 word가 같으면 true, 다르면 false 리턴
 	 */
 	public boolean equals(String word) {
-		return word.equals(word);
+		return this.eng.equals(word);
 	}
 	
 	public Word(String eng, String kor) {

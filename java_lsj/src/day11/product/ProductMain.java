@@ -18,6 +18,7 @@ public class ProductMain {
 	 * 	- 1. 제품 수정[가격]
 	 * 	- 2. 뒤로가기
 	 * 4. 매출 내역 조회
+	 * 	- 일자별 조회
 	 * 5. 종료
 	 * 
 	 * 제품을 저장할 배열 생성(배열이 다 차면 늘려주는 메서드 추가할것)
@@ -97,7 +98,7 @@ public class ProductMain {
 				System.out.print("입고 개수 : ");
 				int num = scan.nextInt();
 				//해당 제품의 개수를 추가하고 종료
-				list[i].count += num;
+				list[i].setCount(list[i].getCount() + num);
 				return;	//일치하는 게시물이 있다면 끝내고 없다면 밑에 프린트문구를 실행하기 위해
 			}
 		}
@@ -137,12 +138,12 @@ public class ProductMain {
 			//제품목록에 선택한 제품이 있으면
 			if(list[i].equals(name)) {
 				//판매개수를 재고개수보다 많이 적었을 경우
-				if(list[i].count < num) {
-					num = list[i].count;
+				if(list[i].getCount() < num) {
+					num = list[i].getCount();
 				}
-				list[i].count -= num;
-				list[i].s_count += num;
-				list[i].totalprice += (list[i].price * num);
+				list[i].setCount(list[i].getCount() - num);
+				list[i].setS_count(list[i].getS_count() + num);
+				list[i].setTotalprice((list[i].getPrice() * num));
 				return;
 			}
 		}
@@ -215,7 +216,7 @@ public class ProductMain {
 		System.out.println("----------------------------------------------------------------");
 		System.out.println("제품 이름			판매개수			총판매금액");
 		for(int i = 0; i < count; i++) {
-			sumprice += list[i].totalprice;
+			sumprice += list[i].getTotalprice();
 			list[i].printSales();
 		}
 		System.out.println();

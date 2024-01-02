@@ -93,6 +93,19 @@ public class StringEx1 {
 			break;
 		case 6:
 			//뜻 삭제
+			System.out.print("뜻을 삭제할 단어 : ");
+			word = scan.next();
+			if(map.containsKey(word)) {
+				System.out.print("삭제할 뜻 : ");
+				String mean = scan.next();
+				if(map.get(word).remove(mean)) {
+					System.out.println("뜻 : " + mean + "을 삭제 했습니다.");
+				} else {
+					System.out.println("뜻이 없습니다.");
+				}
+			}else {
+				System.out.println("없는 단어");
+			}
 			break;
 		case 7:
 			//조회

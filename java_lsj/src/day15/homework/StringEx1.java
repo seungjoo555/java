@@ -58,6 +58,13 @@ public class StringEx1 {
 			//단어 수정
 			break;
 		case 3:
+			System.out.print("삭제할 단어 : ");
+			word = scan.next();
+			if(map.containsKey(word)){
+				map.remove(word);
+			}else {
+				System.out.println("없는 단어 입니다.");
+			}
 			//단어 삭제
 			break;
 		case 4:

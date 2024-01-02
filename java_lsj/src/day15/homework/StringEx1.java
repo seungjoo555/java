@@ -25,15 +25,19 @@ public class StringEx1 {
 				System.out.println("잘못된 메뉴입니다.");
 				scan.nextLine();
 			}
-		}while(menu != 4);
+		}while(menu != 8);
 	}
 	
 	private static void printMenu() {
 		System.out.println("메뉴");
 		System.out.println("1.단어 추가");
-		System.out.println("2.뜻 추가");
-		System.out.println("3.조회");
-		System.out.println("4.종료");
+		System.out.println("2.단어 수정");
+		System.out.println("3.단어 삭제");
+		System.out.println("4.뜻 추가");
+		System.out.println("5.뜻 수정");
+		System.out.println("6.뜻 삭제");
+		System.out.println("7.조회");
+		System.out.println("8.종료");
 		System.out.print("메뉴 선택 : ");
 	}
 
@@ -51,6 +55,12 @@ public class StringEx1 {
 			}
 			break;
 		case 2:
+			//단어 수정
+			break;
+		case 3:
+			//단어 삭제
+			break;
+		case 4:
 			//뜻 추가
 			System.out.print("뜻을 추가할 단어 : ");
 			word = scan.next();
@@ -62,11 +72,17 @@ public class StringEx1 {
 				System.out.println("없는 단어");
 			}
 			break;
-		case 3:
-			//종료
+		case 5:
+			//뜻 수정
+			break;
+		case 6:
+			//뜻 삭제
+			break;
+		case 7:
+			//조회
 			System.out.println(map);
 			break;
-		case 4:
+		case 8:
 			//종료
 			System.out.println("종료");
 			break;

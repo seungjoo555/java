@@ -56,6 +56,15 @@ public class StringEx1 {
 			break;
 		case 2:
 			//단어 수정
+			System.out.print("수정할 단어 : ");
+			word = scan.next();
+			if(map.containsKey(word)){
+				System.out.print(word + " >> (단어수정) : ");
+				String chWord = scan.next();
+				map.put(chWord, map.remove(word));
+			}else {
+				System.out.println("없는 단어 입니다.");
+			}
 			break;
 		case 3:
 			System.out.print("삭제할 단어 : ");

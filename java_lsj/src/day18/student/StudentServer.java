@@ -13,48 +13,46 @@ import java.util.List;
 
 public class StudentServer {
 	
-	static List<Student> list;
+	private static List<Student> list;
+	private static String fileName = "src/day18/student/studentInfo.txt";
 	
 	public static void main(String[] args) {
-		String fileName = "src/day18/student/studentInfo.txt";
 		int port = 5001;
-		
-		try(ServerSocket serverSocket = new ServerSocket(port)) {
+		load();
+		System.out.println(list);
+		try {
+			ServerSocket serverSocket = new ServerSocket(port);
 			while(true) {
 				Socket socket = serverSocket.accept();
-				StudentSocket ss =  new StudentSocket(socket);
-				load(fileName);
-				ss.send(list);
-				list = ss.receive();
-				save(fileName);
+				StudentSocket ss =  new StudentSocket(socket, list);
+				ss.start();
 			}
 		} catch (Exception e) {
 			System.out.println("서버 소켓 생성에서 예외 발생");
 		}
 	}
 	
-	private static void save(String fileName) {
-		try (FileOutputStream fos = new FileOutputStream(fileName);
-			ObjectOutputStream oos = new ObjectOutputStream(fos)){
+	private static void save() {
+		try {
+			FileOutputStream fos = new FileOutputStream(fileName);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(list);
+			oos.flush();
 			System.out.println("저장 완료");
-		} catch (FileNotFoundException e) {
-			//폴더 경로가 잘못된 경우
-			System.out.println("지정된 위치에 파일을 찾을 수 없습니다.");
-		} catch (IOException e) {
-			System.out.println("저장에 실패했습니다.");
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
-	private static void load(String fileName) {
-		try(FileInputStream fis = new FileInputStream(fileName);
-			ObjectInputStream ois = new ObjectInputStream(fis)) {
-			list = ((ArrayList<Student>)ois.readObject());
+	private static void load() {
+		try {
+			FileInputStream fis = new FileInputStream(fileName);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			list = ((List<Student>)ois.readObject());
 			System.out.println("불러오기 성공");
-		} catch (FileNotFoundException e) {
-			System.out.println("지정된 위치에 파일을 찾을 수 없습니다.");
-		} catch (Exception e) {
-			System.out.println("불러오기에 실패 했습니다.");
+		} catch (IOException | ClassNotFoundException e) {
+			list = new ArrayList<Student>();
+			e.printStackTrace();
 		}
 	}
 

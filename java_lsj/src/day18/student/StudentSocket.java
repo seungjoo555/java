@@ -1,53 +1,71 @@
 package day18.student;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
 
-public class StudentSocket {
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+public class StudentSocket extends Thread{
+	@NonNull
 	private Socket socket;
-	List<Student> list = new ArrayList<Student>();
+	@NonNull
+	List<Student> list;
 	
-	public List<Student> receive() {
-		Thread t = new Thread(()->{
-			ObjectInputStream ois = null;
-			try {
-				ois = new ObjectInputStream(socket.getInputStream());
-				while(true) {
-					list = (List<Student>)ois.readObject();
+	private ObjectInputStream ois;//클라이언트에서 읽어오때 사용
+	private ObjectOutputStream oos;//클라이언트에 보낼 때 사용
+	
+	public void run() {
+		try {
+			ois = new ObjectInputStream(socket.getInputStream());
+			oos = new ObjectOutputStream(socket.getOutputStream());
+			while(true) {
+				//클라이언트가 요청한 기능을 실행
+				//클라이언트가 요청한 기능을 입력
+				String menu = ois.readUTF();
+				//요청한 기능을 실행 
+				switch(menu) {
+				case "LOAD":
+					load();
+					System.out.println(list);
 					break;
+				case "SAVE":
+					//저장기능 실행
+					save();
+					return;
 				}
-				System.out.println(list);
-			} catch (Exception e) {
-				System.out.println("예외 발생 읽기 기능 종료");
 			}
-		});
-		t.start();
-		return list;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void send(List<Student> list) {
-		Thread t = new Thread(()->{
-			ObjectOutputStream oos = null;
-			try {
-				oos = new ObjectOutputStream(socket.getOutputStream());
-				while(true) {
-					oos.writeObject(list);
-					oos.flush();
-					System.out.println("전송 완료");
-					break;
-				}
-			} catch (Exception e) {
-				System.out.println("예외 발생 전송 기능 종료");
-			}
-		});
-		t.start();
+	private void load() {
+		try {
+			oos.writeObject(list);
+			oos.flush();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public StudentSocket(Socket socket) {
-		this.socket = socket;
+	private void save() {
+		String fileName = "src/teacher/day18/list.txt";
+		try {
+			ObjectOutputStream foos = 
+				new ObjectOutputStream(new FileOutputStream(fileName));
+			List<Student> std = (List<Student>)ois.readObject();
+			list.addAll(std);
+			foos.writeObject(list);
+			foos.flush();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

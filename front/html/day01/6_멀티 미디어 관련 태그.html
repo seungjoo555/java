@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>멀티 미디어 관련 태그</title>
+</head>
+<body>
+    <img
+        src="https://www.fitpetmall.com/wp-content/uploads/2023/10/230420-0668-1.png"
+        alt="고양이"
+        width="500"
+        height="500"
+        usemap="#testmap">
+    <!--
+        area태그
+        - 영역을 지정
+        - 속성
+         - shape
+          - rect(사각형), circle(원), poly(다각형)를 이용하여 도형의 종류를 선택
+         - coords
+          - 좌표
+          - 도형 종류에 맞게 좌표를 입력. x,y좌표 순으로
+         - href
+          - 이동할 문서의 주소
+         - alt
+          - 대체 문자
+    -->
+    <map name="testmap">
+        <area shape="rect" coords="0,0,250,250" href="http://www.naver.com" alt="네이버">
+        <area shape="circle" coords="375, 125, 125" href = "http://google.com" alt="구글">
+        <area shape="poly" coords="0,250,500,500,500,0,500" href="http://daum.net" alt="다음">
+    </map>
+</body>
+</html>

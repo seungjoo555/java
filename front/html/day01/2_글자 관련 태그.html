@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글자 관련 태그</title>
+</head>
+<body>
+    <!--
+        h태그
+        - 제목태그
+        - 숫자가 작을수록 큰 글자
+        - 단순히 글자를 크게 하기 위해서 사용하지 않는 것이 좋다.
+        - 뉴스에서 제목, 쇼핑몰에서 상품명
+    -->
+    <h1>제목</h1>
+    <h2>제목2</h2>
+    <h3>제목3</h3>
+    <h4>제목4</h4>
+    <h5>제목5</h5>
+    <h6>제목6</h6>
+    <!--
+        br태그
+        - 엔터 효과
+        - html에서는 연속된 공백(스페이스, 탭, 엔터 등)이 있어도 스페이스 하나로 적용
+        - 이 때, 엔터효과를 주기 위해 br태그를 이용
+        &nbsp;
+        - 스페이스 효과
+    -->
+    안녕하세요. &nbsp;&nbsp;&nbsp;&nbsp;
+
+
+    홍길동입니다.
+    <br>
+    안녕하세요.<br>
+    <br>
+    <br>
+    홍길동입니다.
+    <!--
+        hr 태그
+        - 가로 회색 밑줄을 긋는 태그
+    -->
+    <hr>
+    <!--
+        mark 태그
+        - 노란 형광색 배경
+        b 태그
+        - 굵은 글씨
+        strong 태그
+        - 굵은 글씨
+        - 내용을 강조
+    -->
+    <mark>안녕하세요.</mark> 제 <b>이름</b>은 <strong>홍길동</strong>입니다.
+    <br>
+    <!--
+        small 태그
+        - 작은 글씨
+        em 태그
+        - 기울림
+        - 약하게 강조
+        i 태그
+        - 기울임
+        - 아이콘 사용시 활용
+    -->
+    <small>안녕하세요.</small> 제 <em>이름</em>은 <i>홍길동</i>입니다.
+    <br>
+    <s>오랜만에</s> <u>만나서 반갑습니다.</u>
+    <br>
+    <!--
+        blockquote 태그
+        - 인용 태그
+        - 여백을 주어서 표시
+        q 태그
+        - 인용 태그
+        - ""로 표시
+        sup 태그
+        - 위 첨자 태그
+        sub 태그
+        - 아래 첨자 태그
+    -->
+    <blockquote>인용 문구</blockquote>
+    <br>
+    <q>인용 문구</q>
+    <br>
+    2<sup>2</sup>
+    <br>
+    log<sub>10</sub>10
+    <br>
+
+    <!--
+        abbr 태그
+        - 약어를 풀어쓸 때 사용하는 태그
+        - 약어에 마우스를 호버하면 풀어쓴 내용이 보임
+        kbd 태그
+        - 키보드의 키를 표현할 때 사용
+        cite 태그
+        - 사이트를 나타낼 때 사용
+        - 기울어짐
+        code 태그
+        - 코드를 화면에 보여주는 태그
+        - pre 태그와 함께 사용
+        pre 태그
+        - 태그 사이에 있는 내용을 그대로 화면에 출력. 엔터도 각각 적용
+    -->
+    <abbr title="Hyper Text Markup Language">HTML</abbr>
+    <br>
+    <kbd>Ctrl + A</kbd>
+    <br>
+    <cite>Naver</cite>는 검색 사이트이다.
+    <code>
+        <pre>
+            System.out.printLn("Hello world");
+        </pre>
+    </code>
+    <!--
+        p태그
+        - 문단을 구분할 때 사용하는 태그
+        - 위아래 여백이 자동으로 들어가 있음
+    -->
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer faucibus enim et vestibulum hendrerit. Nulla vitae tincidunt ante, nec sollicitudin metus. Etiam sit amet pretium quam. Nunc interdum tristique congue. Proin nisl ante, varius ac turpis id, eleifend commodo nisi. Donec dignissim ipsum eu sapien aliquet, non consectetur risus aliquet. Sed condimentum neque eu ullamcorper tempus. Proin in lacinia velit. Phasellus in sem egestas, rhoncus elit quis, suscipit urna.
+
+        Proin vitae dolor non leo bibendum lacinia ut aliquam dui. Ut interdum tellus eget lectus iaculis, ut dictum est suscipit. Aenean in metus tortor. Mauris placerat enim eget efficitur interdum. Quisque finibus mi in lectus ullamcorper viverra. Nulla facilisi. Aenean arcu ante, suscipit et pretium quis, accumsan eget erat. In efficitur, erat egestas interdum laoreet, eros lacus auctor leo, quis lobortis lorem nunc vitae dolor. Proin eu tellus tincidunt, fringilla risus in, tincidunt velit. Sed iaculis quis dui vitae rutrum.
+        
+        Cras dictum mauris diam, et dapibus risus convallis a. Donec vel dictum velit. Pellentesque posuere efficitur lectus nec egestas. Quisque ex justo, elementum commodo pharetra ut, vehicula ac libero. Sed consequat ut felis at efficitur. Fusce in arcu velit. Sed vel molestie urna. Fusce lectus tortor, congue ut elit eget, lacinia faucibus ex. Phasellus lobortis iaculis felis et consequat. Sed ut sapien quis quam posuere euismod id ac sapien. Cras ut magna pulvinar, sollicitudin ligula non, viverra risus. Donec euismod sit amet nibh vel bibendum. Mauris porttitor placerat mauris, vitae vestibulum nibh aliquam in.
+        
+        Vivamus efficitur eros nunc, sed mattis velit tincidunt ac. Aliquam quis dolor eros. In elementum nec mi nec malesuada. Duis pellentesque, libero quis faucibus sagittis, felis lorem iaculis massa, vitae convallis eros felis sit amet enim. Nunc ante dui, sollicitudin id euismod at, bibendum sed nisl. Nullam scelerisque et mi a vulputate. Aenean vitae imperdiet risus. Maecenas a est ut tortor congue lacinia. Morbi mattis massa nec quam posuere faucibus. Sed gravida ante at dolor gravida, vitae facilisis ligula cursus. Suspendisse mattis rutrum feugiat. Nulla accumsan vel metus et imperdiet. Duis nec erat velit. Nam a porta leo, eu luctus eros. Donec turpis augue, rhoncus non nulla et, vulputate tristique nulla. Curabitur sem dolor, sodales ut hendrerit elementum, sodales ac erat.
+        
+        Duis at porttitor lacus. Ut bibendum blandit elit at cursus. Integer tempus, metus sed consequat tincidunt, orci leo cursus ipsum, vel mollis velit tortor nec diam. Etiam blandit risus sit amet lacus pulvinar elementum. Ut venenatis dolor nec magna ullamcorper, vel dignissim urna luctus. Cras fermentum ultricies sapien non vestibulum. Proin eget ipsum lectus. Phasellus euismod pharetra lectus auctor auctor. Duis fermentum, quam quis interdum viverra, felis lacus laoreet odio, quis volutpat risus massa eu orci. Curabitur sit amet lacinia elit, non vulputate purus.</p>
+</body>
+</html>

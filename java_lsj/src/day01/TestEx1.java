@@ -8,6 +8,19 @@ public class TestEx1 {
 		
 		//char ch1 = 'A';
 		//String ch1 = "A"; 
+		
+		Word wd = new Word();
+		System.out.println(wd);
 	}
 
+}
+
+class Word{
+	String name = "abc";
+	int num = 1;
+	@Override
+	public String toString() {
+		return "Word [name=" + name + ", num=" + num + "]";
+	}
+	
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반응형 예제</title>
+    <style>
+        /*      0 ~ 600px,  600px ~ 900px,  900px ~ 1200px, 1200px ~ 
+        배경색  red         yello           green           blue
+        */
+        /* 모든 크기에 대해 적용 */
+        .box{ background-color: red; height: 200px;}
+        /* 600~900px 사이에서 적용 */
+        @media screen and (min-width: 600px)/* and (max-width: 900px) */{
+            .box{ background-color: yellow;}
+        }
+        @media screen and (min-width: 900px)/* and (max-width: 1200px) */{
+            .box{ background-color: green;}
+        }
+        @media screen and (min-width: 1200px){
+            .box{ background-color: blue;}
+        }
+        .box2{ background-color: blue; height: 200px;}
+        @media screen and (max-width: 1200px){
+            .box2{ background-color: green;}
+        }
+        @media screen/* and (min-width: 600px) */and (max-width: 900px){
+            .box2{ background-color: yellow;}
+        }
+        @media screen/* and (min-width: 0px) */and (max-width: 600px) {
+            .box2{ background-color: red;}
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <hr>
+    <div class="box2"></div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+
+.container{
+    border: 5px solid black; padding: 0 10px;
+}
+.container::after{
+    clear: both; content: ''; display: block;
+}
+.box{
+    margin: 10px 0; 
+    border: 5px solid  red; 
+    width: calc(50% - 5px); box-sizing: border-box;
+    float: left;
+}
+.box:nth-of-type(2n){
+    margin-left: 10px;
+}

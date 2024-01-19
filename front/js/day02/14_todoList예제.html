@@ -6,6 +6,7 @@
 	<title>오늘의 할일</title>
 </head>
 <body>
+	<!--
 	<input type="text" id="todo">
 	<button onclick="todoAdd();">추가</button>
 	<h1>오늘의 할일</h1>
@@ -26,6 +27,29 @@
 
 			let input = document.getElementById('todo');
 			input.value = null;
+		}
+	</script>
+	-->
+	<input type="text" class="text" onchange="addTodoList();">
+	<button onclick="addTodoList();">등록</button>
+	<h1>오늘의 할일</h1>
+	<ul id="todoList"></ul>
+	<script>
+		function addTodoList(){
+			//innerHTML과 value를 이용해서 구현
+			let textElement = document.getElementsByClassName("text")[0];
+			let todoList = document.getElementById("todoList");
+			//입력한 문자열을 가져옴
+			let todo = textElement.value;
+
+			//오늘의 할일에 추가
+			todoList.innerHTML += `<li>${todo}</li>`;
+
+			//입력창에 입력한 문자열을 지움
+			textElement.value = '';
+
+			//입력창을 포커싱
+			textElement.focus();
 		}
 	</script>
 </body>

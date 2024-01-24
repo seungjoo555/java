@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>요소 탐색</title>
+	<style>
+		.yellow{background-color: yellow;}
+		.gray{background-color: gray;}
+	</style>
+</head>
+<body>
+	<ul id="list">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+	<script>
+		/*
+		li태그에 마우스를 hover하면 해당 li태그는 배경색을 노란색으로 하고
+		앞, 뒤에 있는 li태그는 회색으로 변하게 작업
+		*/
+		/*
+		let liList = document.querySelectorAll("li");
+		liList.forEach(function(li){
+			//li태그에 마우스 호버 이벤트 등록
+			li.onmouseenter = function(){
+				add(li);
+			}
+			//li태그에 마우스 호버 해제 이벤트 등록
+			li.onmouseleave = function(){
+				remove(li);
+			}
+		})
+
+		//배경색 넣기
+		function add(a){
+			//이벤트가 발생한 요소의 배경을 변경
+			a.classList.add("yellow");
+			let prev = a.previousElementSibling;
+			if(prev){
+				prev.classList.add("gray");
+			}
+			let next = a.nextElementSibling;
+			if(next){
+				next.classList.add("gray");
+			}
+		}
+
+		//배경색 빼기
+		function remove(a){
+			//이벤트가 발생한 요소의 배경을 변경
+			a.classList.remove("yellow");
+			let prev = a.previousElementSibling;
+			if(prev){
+				prev.classList.remove("gray");
+			}
+			let next = a.nextElementSibling;
+			if(next){
+				next.classList.remove("gray");
+			}
+		}
+		*/
+
+		let liList = document.querySelectorAll("li");
+		//liList에서 하나씩 빼서 li에 저장하여 활용
+		liList.forEach(function(li){
+			li.onmouseenter = function(){
+				/*
+				backgroundColorChange(this, "yellow");
+				let prev = this.previousElementSibling;
+				backgroundColorChange(prev, "gray");
+				let next = this.nextElementSibling;
+				backgroundColorChange(next, "gray");
+				*/
+				hoverEvent(this, "yellow", "gray");
+			}
+			li.onmouseleave = function(){
+				/*
+				backgroundColorChange(this, "white");
+				let prev = this.previousElementSibling;
+				backgroundColorChange(prev, "white");
+				let next = this.nextElementSibling;
+				backgroundColorChange(next, "white");
+				*/
+				//hoverEvent(this, "white", "white");
+				//color와 siblingColor는 기본값이 들어감
+				hoverEvent(this);
+			}
+		});
+
+		function hoverEvent(element, color="white", siblingColor="white"){
+			backgroundColorChange(element, color);
+			//이벤트가 발생한 요소의 이전 요소 탐색
+			let prev = element.previousElementSibling;
+			backgroundColorChange(prev, siblingColor);
+			//이벤트가 발생한 요소의 다음 요소 탐색
+			let next = element.nextElementSibling;
+			backgroundColorChange(next, siblingColor);
+		}
+
+		//요소와 색상이 주어지면 요소가 있는 경우 배경색을 변경하는 함수
+		function backgroundColorChange(element, color){
+			if(element){
+				element.style.backgroundColor = color;
+			}
+		}
+	</script>
+</body>
+</html>

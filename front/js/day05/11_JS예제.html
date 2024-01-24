@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>예제</title>
+	<style>
+		.container{
+			max-width: 500px; margin: 0 auto;
+		}
+		.box-group {
+			border: 3px solid black;
+			margin-bottom: 20px;
+		}
+		.box{
+			height: 400px; display:none;
+		}
+		.box.select{
+			display: block;
+		}
+		.box.box1{background-color: red;}
+		.box.box2{background-color: green;}
+		.box.box3{background-color: blue;}
+		.nav-group {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.page-group{
+			margin: 0 10px;
+		}
+		.max-page{font-weight: bold;}
+		.btn-prev,.btn-next{
+			width: 30px; height: 30px; border-radius: 50%;
+			border-width: 1px; background-color: #fff;
+			cursor: pointer;
+		}
+		.btn-prev:hover, .btn-next:hover{
+			font-weight: bold; background-color: aqua;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="box-group">
+			<div class="box box1" data-page="1">박스1</div>
+			<div class="box box2 select" data-page="2">박스2</div>
+			<div class="box box3" data-page="3">박스3</div>
+		</div>
+		<div class="nav-group">
+			<button class="btn-prev">&lt;</button>
+			<span class="page-group">
+				<span class="cur-page">1</span> / <span class="max-page">3</span>
+			</span>
+			<button class="btn-next"> > </button>
+		</div>
+	</div>
+
+	<script>
+		/*
+		이전 버튼에 클릭 이벤트 등록
+		  select가 있는 요소의 앞 요소를 선택
+		  앞 요소가 없으면 종료
+		  앞 요소에 select 클래스를 추가
+		  이벤트가 발생한 요소에 select 클래스를 제거
+
+		다음 버튼에 클릭 이벤트를 등록
+		  select가 있는 요소의 다음 요소를 선택
+		  다음 요소가 없으면 종료
+		  다음 요소에 select 클래스를 추가
+		  이벤트가 발생한 요소에 select 클래스를 제거
+		*/
+		let prevBtn = document.getElementsByClassName("btn-prev")[0];
+		let nextBtn = document.getElementsByClassName("btn-next")[0];
+		prevBtn.onclick = function () {
+			let select = document.getElementsByClassName("select")[0];
+			let prev = select.previousElementSibling;
+			if (!prev) {
+				return;
+			}
+			select.classList.remove("select");
+			prev.classList.add("select");
+			updatePage();
+		}
+		
+		nextBtn.onclick = function () {
+			let select = document.getElementsByClassName("select")[0];
+			let next = select.nextElementSibling;
+			if (!next) {
+				return;
+			}
+			select.classList.remove("select");
+			next.classList.add("select");
+			updatePage();
+		}
+
+		function updatePage(){
+			//select가 있는 요소 선택
+			let select = document.querySelector(".select");
+			//선택한 요소의 data-page를 가져옴
+			let page = select.getAttribute("data-page");
+			//cur-page 요소를 선택
+			let curPage = document.querySelector(".cur-page");
+			//가져온 page를 cur-page의 텍스트로 수정
+			curPage.innerText = page;
+		}
+		updatePage();
+		</script>
+</body>
+
+</html>

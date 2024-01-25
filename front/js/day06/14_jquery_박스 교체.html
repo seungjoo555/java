@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>박스 교체 예제</title>
+	<script src="../../static/jquery.js"></script>
+	<style>
+		.container{
+			width: 500px; margin: 0 auto;
+		}
+		.box-group{
+			border: 3px solid black;
+		}
+		.box{
+			height: 400px;
+			display: none;
+		}
+		.box1{background-color: skyblue;}
+		.box2{background-color: lightgoldenrodyellow;}
+		.box3{background-color: limegreen;}
+		.nav-group{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-top: 10px;
+		}
+		.page-group{
+			font-size: 30px;
+			margin: 0 10px;
+		}
+		.btn-prev,.btn-next{
+			width: 50px; height: 50px; border-radius: 50%;
+			border-width: 1px; background-color: #fff;
+			cursor: pointer;
+		}
+		.btn-prev:hover,.btn-next:hover{
+			font-weight: bold; background-color: blanchedalmond;
+		}
+		.box.select{
+			display:block;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="box-group">
+			<div class="box box1">박스1</div>
+			<div class="box box2 select">박스2</div>
+			<div class="box box3">박스3</div>
+		</div>
+		<div class="nav-group">
+			<button class="btn-prev">&lt;</button>
+			<span class="page-group">
+				<span class="cur-page">1</span> / <span class="maxpage">3</span>
+			</span>
+			<button class="btn-next">&gt;</button>
+		</div>
+	</div>
+	<script>
+		//다음버튼 클릭 이벤트
+		$(".btn-next").click(function(){
+			//.select 요소를 선택
+			let box = $(".select")
+			//.select 요소의 다음 요소가 있으면
+			if(box.next().length){
+				//다음 요소에 select 클래스를 추가
+				box.next().addClass("select");
+			}
+			//없으면
+			else{
+				//처음 요소에 select 클래스를 추가
+				box.siblings().first().addClass("select");
+			}
+			//기존에 있던 select 클래스를 제거
+			box.removeClass("select");
+			drawPage();
+		});
+		//이전버튼 클릭 이벤트
+		$(".btn-prev").click(function(){
+			//.select 요소를 선택
+			let box = $(".select")
+			//.select 요소의 이전 요소가 있으면
+			if(box.prev().length){
+				//이전 요소에 select 클래스를 추가
+				box.prev().addClass("select");
+			}
+			//없으면
+			else{
+				//마지막 요소에 select 클래스를 추가
+				box.siblings().last().addClass("select");
+			}
+			//기존에 있던 select 클래스를 제거
+			box.removeClass("select");
+			drawPage();
+		});
+		function drawPage(){
+			/*
+			index() : 부모요소를 기준으로 선택요소가 몇번지인지 알려주는 메서드
+						0부터 시작
+			*/
+			let index = $(".select").index();
+			$(".cur-page").text(index+1);
+		}
+	</script>
+</body>
+</html>

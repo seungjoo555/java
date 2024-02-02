@@ -37,7 +37,7 @@ CREATE TABLE `product` (
 DROP TABLE IF EXISTS `category`;
 
 CREATE TABLE `category` (
-	`ca_num`	int	primary key,
+	`ca_num`	int	primary key auto_increment,
 	`ca_name`	varchar(10) not	NULL
 );
 

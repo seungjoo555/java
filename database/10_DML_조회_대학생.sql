@@ -1,3 +1,5 @@
+USE UNIVERSITY;
+
 # 컴퓨터공학 고길동 학생이 수강신청한 강의 개수를 조회하는 쿼리
 SELECT ST_NAME AS "학생 이름", ST_MAJOR AS "전공", COUNT(*) AS "신청한 강의 수"
 FROM 

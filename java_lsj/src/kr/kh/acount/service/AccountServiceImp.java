@@ -13,6 +13,7 @@ import kr.kh.acount.dao.AccountDAO;
 import kr.kh.acount.model.vo.Category;
 import kr.kh.acount.model.vo.Item;
 import kr.kh.acount.model.vo.Type;
+import kr.kh.acount.pagination.Criteria;
 
 public class AccountServiceImp implements AccountService{
 
@@ -63,6 +64,14 @@ public class AccountServiceImp implements AccountService{
 			return null;
 		}
 		return accountDao.selectItemListByDate(dateStr);
+	}
+	
+	@Override
+	public List<Item> getItemListByDate(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return accountDao.selectItemListSearch(cri);
 	}
 
 	@Override

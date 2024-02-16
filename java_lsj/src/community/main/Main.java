@@ -1,5 +1,6 @@
 package community.main;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import community.controller.CommunityController;
@@ -8,13 +9,18 @@ public class Main {
 
 	private static CommunityController communityController;
 	public static void main(String[] args) {
-		int menu;
+		int menu = 0;
 		Scanner scan = new Scanner(System.in);
 		communityController = new CommunityController(scan);
 		do {
-			printMenu();
-			menu = scan.nextInt();
-			runMenu(menu);
+			try {
+				printMenu();
+				menu = scan.nextInt();
+				runMenu(menu);
+			}catch(InputMismatchException e) {
+				System.out.println("없는 메뉴입니다.");
+				scan.nextLine();//입력 버퍼 비우기
+			}
 		}while(menu != 3);
 
 	}
@@ -37,7 +43,7 @@ public class Main {
 			System.out.println("프로그램 종료");
 			break;
 		default:
-			System.out.println("잘못된 메뉴입니다.");
+			throw new InputMismatchException();
 		}
 	}
 

@@ -2,6 +2,7 @@ package community.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -38,20 +39,26 @@ private UserDAO userDao;
 	}
 
 	@Override
-	public boolean checkId(String id) {
-		// TODO Auto-generated method stub
-		return false;
+	public Member checkId(String id) {
+		if(id == null) {
+			return null;
+		}
+		return userDao.searchId(id);
 	}
 
 	@Override
-	public boolean checkPwd(String pwd) {
-		// TODO Auto-generated method stub
-		return false;
+	public List<Member> getRequestMember(String string) {
+		return userDao.selectRequestMemberList(string);
 	}
 
 	@Override
-	public Member getMember(String id, String pwd) {
-		// TODO Auto-generated method stub
-		return null;
+	public void okeydokeyAllRequest() {
+		userDao.updateAllRequestMember();
 	}
+
+	@Override
+	public boolean okeydokeyRequest(String me_id) {
+		return userDao.updateRequestMember(me_id);
+	}
+
 }

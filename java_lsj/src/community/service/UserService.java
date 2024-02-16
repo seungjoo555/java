@@ -1,15 +1,19 @@
 package community.service;
 
+import java.util.List;
+
 import community.model.vo.Member;
 
 public interface UserService {
 
 	boolean insertMember(Member member);
 
-	boolean checkId(String id);
+	Member checkId(String id);
 
-	boolean checkPwd(String pwd);
+	List<Member> getRequestMember(String string);
 
-	Member getMember(String id, String pwd);
+	void okeydokeyAllRequest();
+
+	boolean okeydokeyRequest(String me_id);
 
 }

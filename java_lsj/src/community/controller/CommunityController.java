@@ -435,12 +435,20 @@ public class CommunityController {
 		if(userService.deleteMember(user.getMe_id())) {
 			System.out.println("회원탈퇴가 완료되었습니다.");
 			user = new Member();
+			try {
+				test();
+			} catch (MyException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}else {
 			System.out.println("탈퇴 실패. 잠시후 다시 시도해주세요.");
 		}
 		
 	}
 
-	
+	private void test() throws MyException{
+		throw new MyException("회원 탈퇴");
+	}
 	
 }

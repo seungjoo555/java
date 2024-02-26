@@ -1,6 +1,7 @@
 package kr.kh.app.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.kh.app.model.vo.BoardVO;
+import kr.kh.app.model.vo.CommunityVO;
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.service.BoardService;
 import kr.kh.app.service.BoardServiceImp;
@@ -31,8 +33,9 @@ public class BoardInsertServlet extends HttpServlet {
 			return;
 		}
 		
-		
-		
+		//게시판 전체를 가져옴
+		ArrayList<CommunityVO> list = boardService.getCommunityList();
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/views/board/insert.jsp").forward(request, response);
 	}
 

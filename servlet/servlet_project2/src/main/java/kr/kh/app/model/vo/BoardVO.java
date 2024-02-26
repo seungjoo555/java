@@ -13,12 +13,5 @@ public class BoardVO {
 	private String bo_content; 
 	private int bo_view; 
 	private int bo_report_count;
-	private CommunityVO community;
-	
-	public BoardVO(int bo_co_num,String bo_title, String bo_content, String me_id) {
-		this.bo_co_num = bo_co_num;
-		this.bo_title = bo_title;
-		this.bo_content = bo_content;
-		this.bo_me_id = me_id;
-	}
+	//private CommunityVO community;
 }

@@ -11,6 +11,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
+
 <div class="container">
 	<form action="<c:url value="/login"/>" method="post">
 		<h1>로그인</h1>

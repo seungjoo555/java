@@ -36,8 +36,9 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("user", user);//세션에 user라는 이름으로 회원 정보를 저장
 			response.sendRedirect(request.getContextPath() + "/");
 			return;
+		}else {
+			doGet(request, response);
 		}
-		doGet(request, response);
 	}
 
 }

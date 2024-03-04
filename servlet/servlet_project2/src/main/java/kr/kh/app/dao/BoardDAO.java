@@ -20,6 +20,10 @@ public interface BoardDAO {
 
 	boolean updateView(@Param("num")int num);
 
-	BoardVO slectBoard(@Param("num")int num);
+	BoardVO selectBoard(@Param("num")int num);
+
+	boolean deleteBoard(@Param("num")int num);
+
+	boolean updateBoard(@Param("board")BoardVO board);
 
 }

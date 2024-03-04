@@ -26,7 +26,7 @@ public class BoardListServlet extends HttpServlet {
 		String search = request.getParameter("search");
 		
 		//화면에서 보낸 page정보를 가져옴
-		int page;
+		int page = 1;
 		try {
 			page = Integer.parseInt(request.getParameter("page"));
 		}catch (Exception e) {

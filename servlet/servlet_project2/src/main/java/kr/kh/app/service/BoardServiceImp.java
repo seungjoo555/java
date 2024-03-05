@@ -1,8 +1,11 @@
 package kr.kh.app.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import javax.servlet.http.Part;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -10,15 +13,17 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.kh.app.dao.BoardDAO;
-import kr.kh.app.dao.MemberDAO;
 import kr.kh.app.model.vo.BoardVO;
 import kr.kh.app.model.vo.CommunityVO;
+import kr.kh.app.model.vo.FileVO;
 import kr.kh.app.model.vo.MemberVO;
 import kr.kh.app.pagination.Criteria;
+import kr.kh.app.utils.FileUploadUtils;
 
 public class BoardServiceImp implements BoardService {
 
 	private BoardDAO boardDao;
+	private String uploadPath = "D:\\uploads";
 	
 	public BoardServiceImp() {
 		String resource = "kr/kh/app/config/mybatis-config.xml";
@@ -32,6 +37,10 @@ public class BoardServiceImp implements BoardService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		File file = new File(uploadPath);
+		if(!file.exists()) {
+			file.mkdirs();
+		}
 	}
 
 	@Override
@@ -44,14 +53,32 @@ public class BoardServiceImp implements BoardService {
 	}
 
 	@Override
-	public boolean insertBoard(BoardVO board) {
+	public boolean insertBoard(BoardVO board, ArrayList<Part> partList) {
 		if( board == null || 
 			!checkString(board.getBo_title()) || 
 			!checkString(board.getBo_content())) {
 			return false;
 		}
-		return boardDao.insertBoard(board);
+		if(!checkString(board.getBo_me_id())) {
+			return false;
+		}
+		boolean res = boardDao.insertBoard(board);
+		//게시글 등록에 실패한 경우
+		if(!res) {
+			return false;
+		}
+		//첨부파일이 없는 경우
+		if(partList == null || partList.size() == 0) {
+			return true;
+		}
+		
+		for(Part filePart : partList) {
+			uploadFile(filePart, board.getBo_num());
+		}
+		
+		return res;
 	}
+	
 	//문자열이 null이거나 빈 문자열이면 false, 아니면 true를 반환하는 메서드
 	public boolean checkString(String str) {
 		if(str == null || str.length() == 0) {
@@ -121,7 +148,18 @@ public class BoardServiceImp implements BoardService {
 		return boardDao.updateBoard(board);
 	}
 	
-	
+	private void uploadFile(Part filePart, int bo_num) {
+		if(filePart == null || bo_num == 0) {
+			return;
+		}
+		String fileOriName = FileUploadUtils.getFileName(filePart);
+		if(fileOriName == null || fileOriName.length() == 0) {
+			return;
+		}
+		String fileName = FileUploadUtils.upload(uploadPath,  filePart);
+		FileVO file = new FileVO(bo_num, fileName, fileOriName);
+		boardDao.insertFile(file);
+	}
 	
 	
 	

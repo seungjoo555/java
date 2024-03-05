@@ -148,6 +148,11 @@ public class BoardServiceImp implements BoardService {
 		return boardDao.updateBoard(board);
 	}
 	
+	@Override
+	public ArrayList<FileVO> getFile(int num) {
+		return boardDao.selectFileByBo_num(num);
+	}
+	
 	private void uploadFile(Part filePart, int bo_num) {
 		if(filePart == null || bo_num == 0) {
 			return;
@@ -160,9 +165,7 @@ public class BoardServiceImp implements BoardService {
 		FileVO file = new FileVO(bo_num, fileName, fileOriName);
 		boardDao.insertFile(file);
 	}
-	
-	
-	
+
 	
 	
 }

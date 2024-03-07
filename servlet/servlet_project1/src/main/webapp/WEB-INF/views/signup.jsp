@@ -45,7 +45,11 @@
 		fetch(`<c:url value="/id/check"/>?id=\${id}`)
 		.then(response => response.text())
 		.then(data => {
-			console.log(data);
+			if(data == "true"){
+				alert("사용 가능한 아이디입니다.")
+			}else{
+				alert("이미 사용 중인 아이디입니다.")				
+			}
 		})
 		.catch(error => console.error("Error : ", error));
 	});

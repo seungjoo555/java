@@ -40,18 +40,31 @@
 </div>
 <script src="//code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
+	let flag = false;
 	$("#idCheck").click(function(){
 		let id = $("[name=id]").val();
 		fetch(`<c:url value="/id/check"/>?id=\${id}`)
 		.then(response => response.text())
 		.then(data => {
 			if(data == "true"){
-				alert("사용 가능한 아이디입니다.")
+				alert("사용 가능한 아이디입니다.");
+				flag = true;
 			}else{
-				alert("이미 사용 중인 아이디입니다.")				
+				alert("이미 사용 중인 아이디입니다.");
 			}
 		})
 		.catch(error => console.error("Error : ", error));
+	});
+	$("[name=id]").change(function(){
+		flag = false;
+	});
+	$("form").submit(function(){
+		//정규표현식을 구현
+		
+		if(!flag){
+			alert("아이디 중복 확인을 하세요.");
+			return false;
+		}
 	});
 </script>
 </body>

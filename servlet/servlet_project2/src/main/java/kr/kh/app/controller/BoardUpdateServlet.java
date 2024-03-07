@@ -44,7 +44,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("board", board);
 		//게시글에 있는 첨부파일 가져와서 화면에 전송
-		ArrayList<FileVO> fileList = boardService.getFile(num);
+		ArrayList<FileVO> fileList = boardService.getFileList(num);
 		request.setAttribute("fileList", fileList);
 		
 		request.getRequestDispatcher("/WEB-INF/views/board/update.jsp").forward(request, response);
@@ -69,18 +69,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		//새로 추가된 첨부파일 정보 가져옴
 		ArrayList<Part> fileList = (ArrayList<Part>) request.getParts();
 		//삭제할 첨부파일 정보 가져옴
-		String numsStr [] = request.getParameterValues("fi_num");
-		//삭제할 파일의 번호를 nums에 저장
-		ArrayList<Integer> nums = new ArrayList<Integer>();
-		if(numsStr != null) {
-			for(String numStr : numsStr) {
-				try {
-					int fi_num = Integer.parseInt(numStr);
-					nums.add(fi_num);
-				}catch (Exception e) {
-				}
-			}
-		}
+		String nums [] = request.getParameterValues("fi_num");
 		
 		//서비스에게 회원 정보와 수정할 게시글 정보를 주면서 수정하라고 요청
 		boolean res = boardService.updateBoard(board, user, nums, fileList);

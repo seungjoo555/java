@@ -7,7 +7,11 @@
 <meta charset="UTF-8">
 <title>게시글 상세</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
@@ -32,9 +36,13 @@
 				    <label for="view" class="form-label">조회수:</label>
 				    <input type="text" class="form-control" id="view" name="view" value="${board.bo_view}" readonly>
 		  		</div>
+		  		<div class="mb-3 mt-3 clearfix">
+				    <button type="button" id="btnUp" data-state="1" class="btn btn-outline-danger col-5 float-start">추천</button>
+				    <button type="button" id="btnDown" data-state="-1" class="btn btn-outline-danger col-5 float-end">비추천</button>
+		  		</div>
 		  		<div class="mb-3 mt-3">
 				    <label for="content" class="form-label">내용:</label>
-				    <textarea rows="10" class="form-control" id="content" name="content" readonly>${board.bo_content}</textarea>
+				    <div class="form-control" style="min-height: 400px;">${board.bo_content}</div>
 		  		</div>
 		  		<c:if test="${fileList != null && fileList.size() != 0}">
 				  	<div class="mb-3 mt-3">
@@ -56,5 +64,67 @@
 		</c:otherwise>
 	</c:choose>
 </div>
+<script type="text/javascript">
+	let btnUp = document.getElementById("btnUp");
+	let btnDown = document.getElementById("btnDown");
+	
+	btnUp.onclick = recommend;
+	btnDown.onclick = recommend;
+	
+	function recommend() {
+		//로그인 안했으면
+		if('${user.me_id}' == ''){
+			if(confirm("로그인이 필요한 서비스입니다. 로그인으로 이동합니까?.")){
+				location.href = "<c:url value='/login'/>";
+			}
+			else{
+				return;
+			}
+		}
+		let boNum = '${board.bo_num}';
+		//state가 1이면 추천, -1이면 비추천
+		let state = this.getAttribute("data-state");
+		fetch(`<c:url value="/recommend"/>?boNum=\${boNum}&state=\${state}`)
+		.then(response => response.text())
+		.then(data => {
+			let str = state == 1 ? '추천' : '비추천';
+			initRecommendBtn(btnUp);
+			initRecommendBtn(btnDown);
+			
+			switch(data){
+			case "1":
+				alert('게시글 추천 완료');
+				selectRecommendBtn(btnUp);
+				break;
+			case "-1":
+				alert('게시글 비추천 완료');
+				selectRecommendBtn(btnDown);
+				break;
+			case "0":
+				alert(`게시글 \${str} 취소`);
+				break;
+			default: 	alert(data);
+			}
+		})
+		.catch(error => console.error(error));
+	}
+	//추천/비추천 버튼을 기본으로 돌리는 함수 btn-outline-danger
+	function initRecommendBtn(btn){
+		btn.classList.remove('btn-danger');
+		btn.classList.add('btn-outline-danger');
+	}
+	//추천/비추천 버튼을 선택했을 때 색상을 지정하는 함수
+	function selectRecommendBtn(btn){
+		btn.classList.remove('btn-outline-danger');
+		btn.classList.add('btn-danger');		
+	}
+	<c:if test="${recommend != null}">
+		if(${recommend.re_state == 1}){
+			selectRecommendBtn(btnUp);
+		}else if(${recommend.re_state == -1}){
+			selectRecommendBtn(btnDown);
+		}
+	</c:if>
+</script>
 </body>
 </html>

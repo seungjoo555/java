@@ -37,8 +37,8 @@
 			</div>
 			<c:if test="${fileList != null && fileList.size() != 0}">
 			  	<div class="mb-3 mt-3">
-				    <label for="content" class="form-label">첨부파일:</label>
-				    <c:forEach items="${fileList }" var="file">
+				    <label class="form-label">첨부파일:</label>
+				    <c:forEach items="${fileList}" var="file">
 				    	<a href="<c:url value="/download?filename=${file.fi_name}"/>" class="form-control" download="${file.fi_ori_name}">${file.fi_ori_name}</a>
 				    </c:forEach>
 			  	</div>

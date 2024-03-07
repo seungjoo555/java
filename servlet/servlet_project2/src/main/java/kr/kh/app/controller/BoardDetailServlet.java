@@ -34,7 +34,7 @@ public class BoardDetailServlet extends HttpServlet {
 		//화면에 게시글을 전송
 		request.setAttribute("board", board);
 		//서비스에게 게시글 번호를 주면서 첨부파일을 가져오라고 시킴
-		ArrayList<FileVO> fileList = boardService.getFile(num);
+		ArrayList<FileVO> fileList = boardService.getFileList(num);
 		//첨부파일을 화면에 전송
 		request.setAttribute("fileList", fileList);
 		

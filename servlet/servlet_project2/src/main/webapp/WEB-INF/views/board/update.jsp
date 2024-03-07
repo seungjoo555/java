@@ -34,7 +34,7 @@
 		<div class="mb-3 mt-3" id="attachment">
 			<label class="form-label">첨부파일</label>
 			<c:forEach items="${fileList}" var="file">
-				<span class="form-control">${file.fi_ori_name}<a href="#" class="btn-del" data-target="${file.fi_num}"> X </a></span>
+				<span class="form-control">${file.fi_ori_name}<a href="#" class="btn-del" data-target="${file.fi_num}">&times;</a></span>
 			</c:forEach>
 			<c:forEach begin="1" end="${3 - fileList.size()}">
 				<input type="file" name="file" class="form-control">
@@ -43,48 +43,24 @@
 		<button type="submit" class="btn btn-success col-12">게시글 수정하기</button>
 	</form>
 </div>
+<script src="//code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
-	let btnDel = document.querySelectorAll(".btn-del");
-	let attachment = document.querySelector("#attachment");
-
-	btnDel.forEach((element)=>{
-		element.onclick = function(e){
-			e.preventDefault();
-			let num = this.getAttribute("data-target");
-			let inputHidden = 
-				createElement('input',null,{
-					'type' : 'hidden',
-					'name' : 'fi_num',
-					'value': `\${num}`
-				});
-			attachment.prepend(inputHidden);
-			this.parentElement.remove();
-			let inputFile = 
-				createElement('input',null,{
-					'type' : 'file',
-					'name' : 'file',
-					'class': 'form-control'
-				});
-			attachment.append(inputFile);
-		}
+	$(".btn-del").click(function(e){
+		e.preventDefault();
+		//X버튼의 data-target값을 가져옴
+		let fi_num = $(this).data("target");
+		
+		//input file을 추가
+		let inputFile = '<input type="file" class="form-control" name="file">';
+		$("#attachment").append(inputFile);
+		
+		//input hidden을 추가. 삭제하려는 첨부파일 번호를 이용하여
+		let inputHidden = `<input type="hidden" name="fi_num" value="\${fi_num}">`;
+		$("#attachment").prepend(inputHidden);
+		
+		//클릭한 X버튼이 있는 첨부파일을 삭제
+		$(this).parent().remove();
 	});
-	
-	function createElement(tagName, text, attrs){
-		let element = document.createElement(tagName);
-		if(text){
-			let textNode = document.createTextNode(text);
-			element.append(textNode);
-		}
-		if(!attrs){
-			return element;
-		}
-		for(key in attrs){
-			let attr = document.createAttribute(key);
-			attr.value = attrs[key];
-			element.setAttributeNode(attr);
-		}
-		return element;
-	}
 </script>
 </body>
 </html>

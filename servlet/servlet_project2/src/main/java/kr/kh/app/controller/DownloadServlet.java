@@ -19,7 +19,9 @@ public class DownloadServlet extends HttpServlet {
 	private String uploadPath = "D:\\uploads";
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//화면에서 보낸 filename을 가져옴
 		String fileName = request.getParameter("filename");
+		//실제 파일을 가져와서 클라이언트에 보냄
 		String filePath = uploadPath + fileName.replace('/', File.separatorChar);
 		File file = new File(filePath);
 		try(FileInputStream fis = new FileInputStream(file);

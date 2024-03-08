@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>게시글 상세</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
@@ -38,7 +38,7 @@
 			<br>
 			<div class="mb-3 mt-3">
 				<label class="form-label">내용</label>
-				<textarea class="form-control" rows="10" readonly>${board.bo_content}</textarea>
+				<div class="form-control" style="min-height: 400px">${board.bo_content}</div>
 			</div>
 			<c:if test="${fileList != null && fileList.size() != 0}">
 			  	<div class="mb-3 mt-3">

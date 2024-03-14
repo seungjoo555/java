@@ -4,35 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
 	<!-- jquery validation -->	
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
 	<title>회원가입</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	<!-- Brand/logo -->
-	<a class="navbar-brand" href="<c:url value="/"/>"> 로고<img src="bird.jpg" alt="logo"
-		style="width: 40px;">
-	</a>
-
-	<!-- Links -->
-	<ul class="navbar-nav">
-		<li class="nav-item">
-			<a class="nav-link" href="<c:url value="/signup"/>">회원가입</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="<c:url value="/login"/>">로그인</a>
-		</li>
-	</ul>
-</nav>
-<div class="container">
 	<form action="<c:url value="/signup"/>" method="post">
 		<h1>회원가입</h1>
 		<hr>
@@ -58,8 +35,6 @@
 		</div>
 		<button class="btn btn-outline-success col-12">회원가입</button>
 	</form>
-</div>
-
 <script type="text/javascript">
 $("form").validate({
 	rules : {

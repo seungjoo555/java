@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	<!-- Brand/logo -->
-	<a class="navbar-brand" href="<c:url value="/"/>"><img src="‪resources/img/hungry.png" alt="logo"
-		style="width: 40px;">
+	<a class="navbar-brand" href="<c:url value="/"/>"><img src="<c:url value="/img/hungry.png"/>" alt="logo"
+		style="width: 100px;">
 	</a>
 
 	<!-- Links -->

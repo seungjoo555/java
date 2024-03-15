@@ -15,4 +15,6 @@ public class BoardVO {
 	private int bo_view;
 	private int bo_report_count;
 	private String bo_co_name;
+	private int bo_up;
+	private int bo_down;
 }

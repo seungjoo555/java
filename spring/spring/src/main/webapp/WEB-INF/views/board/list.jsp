@@ -22,7 +22,7 @@
 				<td>${board.bo_title}</td>
 				<td>${board.bo_me_id}</td>
 				<td>${board.bo_view}</td>
-				<td></td>
+				<td>${board.bo_up} / ${board.bo_down}</td>
 			</tr>
 		</c:forEach>
 	</tbody>

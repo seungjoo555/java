@@ -69,8 +69,7 @@ public class MemberServiceImp implements MemberService {
 				newPw += '#';
 			}
 		}
-		
-		return null;
+		return newPw;
 	}
 
 	public boolean mailSend(String to, String title, String content) {
@@ -145,7 +144,7 @@ public class MemberServiceImp implements MemberService {
 		String newPw = randomPassword1(6);
 		
 		//이메일을 전송
-		String title = "새 비밀번호입니다.";
+		String title = "메모 해두라고 그만 찾고";
 		String content = "새 비밀번호는 <b>"+ newPw +"</b> 입니다. 잊지마쇼";
 		boolean res = mailSend(member.getMe_email(), title, content);
 		
@@ -153,6 +152,39 @@ public class MemberServiceImp implements MemberService {
 		String encPw = passwordEncoder.encode(newPw);
 		memberDao.updatePassword(id, encPw);
 		return res;
+	}
+
+	@Override
+	public boolean pwCheck(String pw, MemberVO user) {
+		if(user == null || pw == null) return false;
+		return passwordEncoder.matches(pw, user.getMe_pw());
+	}
+
+	@Override
+	public boolean updateMember(MemberVO member, MemberVO user) {
+		if(member == null || user == null) {
+			return false;
+		}
+		if(!checkString(member.getMe_email())) {
+			return false;
+		}
+		//비번을 안 바꾸는 경우 : 기존 비밀번호를 이용
+		if(!checkString(member.getMe_pw())) {
+			member.setMe_pw(user.getMe_pw());
+		}else {
+			String encPw = passwordEncoder.encode(member.getMe_pw());
+			member.setMe_pw(encPw);
+		}
+		//로그인한 회원 아이디로 아이디를 설정
+		member.setMe_id(user.getMe_id());
+		boolean res = memberDao.updateMember(member);
+		if(!res) {
+			return false;
+		}
+		//세션에 회원 정보를 업데이트하기 위해 작업
+		user.setMe_pw(member.getMe_pw());
+		user.setMe_email(member.getMe_email());
+		return true;
 	}
 
 	

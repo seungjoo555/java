@@ -41,7 +41,17 @@
 	<context:component-scan base-package="kr.kh.spring.*" />
 	
 	<!-- LoginInterceptor를 등록 -->
-	<beans:bean id="loginInterceptor" class="kr.kh.spring.interceptor.LoginInterceptor"/>
+	<beans:bean id="loginInterceptor" 
+		class="kr.kh.spring.interceptor.LoginInterceptor"/>
+	<!-- MemberInterceptor를 등록 -->
+	<beans:bean id="memberInterceptor" 
+		class="kr.kh.spring.interceptor.MemberInterceptor"/>
+	<!-- GuestInterceptor를 등록 -->
+	<beans:bean id="guestInterceptor" 
+		class="kr.kh.spring.interceptor.GuestInterceptor"/>
+	<!-- AutoLoginInterceptor를 등록 -->	
+	<beans:bean id="autoLoginInterceptor" 
+		class="kr.kh.spring.interceptor.AutoLoginInterceptor"/>
 	
 	<interceptors>
 		<!-- LoginInterceptor가 실행된 URL 지정 -->
@@ -49,22 +59,31 @@
 			<mapping path="/login"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
+	
+		<!-- MemberInceptor가 실행된 URL 지정 -->
+		<interceptor>
+			<mapping path="/board/insert"/>
+			<mapping path="/board/update"/>
+			<mapping path="/board/delete"/>
+			<mapping path="/mypage"/>
+			<beans:ref bean="memberInterceptor"/>
+		</interceptor>
+		
+		<!-- GuestInterCeptor가 실행된 URL 지정 -->
+		<interceptor>
+			<mapping path="/login"/>
+			<mapping path="/signup"/>
+			<mapping path="/find/pw"/>
+			<beans:ref bean="guestInterceptor"/>
+		</interceptor>
+		
+		<!-- AutoLoginInterCeptor가 실행된 URL 지정 -->
+		<interceptor>
+			<mapping path="/*"/>
+			<beans:ref bean="autoLoginInterceptor"/>
+		</interceptor>
+		
 	</interceptors>
-	<!-- MemberInceptor가 실행된 URL 지정 -->
-	<interceptor>
-		<mapping path="/board/insert"/>
-		<mapping path="/board/update"/>
-		<mapping path="/board/delete"/>
-		<mapping path="/mypage"/>
-		<beans:ref bean="memberInterceptor"/>
-	</interceptor>
-	<!-- GuestInterCeptor가 실행된 URL 지정 -->
-	<interceptor>
-		<mapping path="/login"/>
-		<mapping path="/signup"/>
-		<mapping path="/find/pw"/>
-		<beans:ref bean="guestInterceptor"/>
-	</interceptor>
 	
 	<!-- servlet-context.xml -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

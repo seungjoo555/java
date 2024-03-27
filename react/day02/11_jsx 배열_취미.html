@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>state 두개 활용 예제</title>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        //App 컴포넌트
+        function App(){
+            /* 취미를 입력받고, 버튼을 클릭하면 입력된 취미가 ul태그에 추가되도록 코드를 작성
+            */
+            let [hobby, setHobby] = React.useState([]);
+            let [data, setData] = React.useState("");
+            function inputChange(e){
+                setData(e.target.value);
+            }
+            function clickBtn(){
+                setHobby(hobby=>[...hobby, data]);
+                setData("");    //입력태그에 값을 비워주는 역할
+            }
+            return (
+                <div>
+                    <input onChange={inputChange} value={data}/>
+                    <button onClick={clickBtn}>추미추가</button>
+                    <ul>
+                        {hobby.map((item)=><li>{item}</li>)}
+                    </ul>
+                </div>
+            );
+        };
+        root.render(<App/>);
+    </script>
+</body>
+</html>

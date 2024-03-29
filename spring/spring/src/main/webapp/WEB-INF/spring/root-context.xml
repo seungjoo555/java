@@ -24,7 +24,7 @@
 	              value="jdbc:mysql://localhost:3306/community?useSSL=false&amp;serverTimezone=Asia/Seoul">
 	    </property>
 	    <property name="username" value="root"></property>
-	    <property name="password" value="1234"></property>
+	    <property name="password" value="root"></property>
 	</bean>
 	
 	<!-- Mapper 설정 -->

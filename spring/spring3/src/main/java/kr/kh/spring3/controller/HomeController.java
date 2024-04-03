@@ -1,5 +1,7 @@
 package kr.kh.spring3.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,8 +60,8 @@ public class HomeController {
 	public String loginPost(Model model, LoginDTO loginDto) {
 		log.info("들어온 정보 \n" + loginDto);
 		MemberVO user = memberService.getMember(loginDto);
+		model.addAttribute("user", user);
 		if(user != null) {
-			model.addAttribute("user", user);
 			model.addAttribute("msg", "로그인 했다");
 			model.addAttribute("url", "/");
 		}else {
@@ -69,5 +71,12 @@ public class HomeController {
 		return "message";
 	}
 	
+	@GetMapping("/logout")
+	public String logout(Model model, HttpSession session) {
+		session.removeAttribute("user");
+		model.addAttribute("msg", "로그아웃 했다");
+		model.addAttribute("url", "/");
+		return "message";
+	}
 	
 }

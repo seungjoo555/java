@@ -32,14 +32,14 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${list}" var="post" varStatus="vs">
-			<tr>
-				<td>${pm.totalCount - vs.index - pm.cri.pageStart}</td>
-				<td>
-					<a href="#">${post.bo_title}</a>
-				</td>
-				<td>${post.bo_me_id}</td>
-				<td>${post.bo_view}</td>
-			</tr>
+				<tr>
+					<td>${pm.totalCount - vs.index - pm.cri.pageStart }</td>
+					<td>
+						<a href="<c:url value="/post/detail?num=${post.bo_num}"/>">${post.bo_title}</a>
+					</td>
+					<td>${post.bo_me_id }</td>
+					<td>${post.bo_view }</td>
+				</tr>
 			</c:forEach>
 		</tbody>
 	</table>

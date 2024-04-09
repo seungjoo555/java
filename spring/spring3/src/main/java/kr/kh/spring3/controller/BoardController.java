@@ -1,8 +1,6 @@
 package kr.kh.spring3.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,9 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.kh.spring3.model.vo.BoardVO;
+import kr.kh.spring3.model.vo.FileVO;
 import kr.kh.spring3.model.vo.MemberVO;
 import kr.kh.spring3.pagination.Criteria;
 import kr.kh.spring3.pagination.PageMaker;
@@ -58,15 +56,18 @@ public class BoardController {
 		return "message";
 	}
 	
-	
-	
-	
-	@ResponseBody
-	@GetMapping("/api/post/list")
-	public Map<String, Object> apiPostList(){
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		ArrayList<BoardVO> list = boardService.getBoardList(new Criteria());
-		map.put("list", list);
-		return map;
+	@GetMapping("/post/detail")
+	public String postDetail(Model model, int num) {
+		//게시글 조회수 증가
+		boardService.updateView(num);
+		//게시글을 가져옴
+		BoardVO board = boardService.getBoard(num);
+		//게시글 첨부파일을 가져옴
+		ArrayList<FileVO> list = boardService.getFileList(num);
+		log.info(list);
+		//화면에 게시글, 첨부파일을 전송
+		model.addAttribute("board", board);
+		model.addAttribute("list", list);
+		return "/post/detail";
 	}
 }

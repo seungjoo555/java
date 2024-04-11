@@ -1,0 +1,15 @@
+@charset "UTF-8";
+#seachbox{ display: flex; justify-content: center; }
+#seachbox .input-group{ width: 500px; }
+#seachbox .input-group>.form-control, #seachbox .input-group>.form-floating, #seachbox .input-group>.form-select{ flex: none; }
+#search-select{ 
+	width: 28%; 
+	/* 기호처리 */
+	background-image: url(/team1/images/down_arrow.svg);
+	background-size: 15px;
+	background-position: calc(100% - 10px) center;
+	background-repeat: no-repeat;
+	border-radius: 5px 0 0 5px;
+}
+#search-input{ width: 57%; }
+#search-btn{ width: 15%; }

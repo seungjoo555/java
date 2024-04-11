@@ -79,4 +79,10 @@ public class HomeController {
 		return "message";
 	}
 	
+	@GetMapping("/sse")
+	public String sse() {
+		
+		return "/ex/sse";
+	}
+	
 }

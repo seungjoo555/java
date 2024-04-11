@@ -56,7 +56,7 @@
 		<div class="box-pagination">
 			<ul class="pagination justify-content-center"></ul>
 		</div>
-		<div class="box-commnt-insert">
+		<div class="box-comment-insert">
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
 					<textarea class="form-control textarea-comment"></textarea>

@@ -16,4 +16,6 @@ public class MemberVO {
 	int me_fail;
 	String me_cookie;
 	String me_cookie_limit;
+	private boolean autoLogin;
+	
 }

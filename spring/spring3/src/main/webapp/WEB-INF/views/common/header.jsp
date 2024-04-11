@@ -19,6 +19,9 @@
 			</li>
 		</c:if>
 			<li class="nav-item">
+      			<a class="nav-link" href="<c:url value="/sse"/>">sse 예제</a>
+    		</li>
+			<li class="nav-item">
 				<a class="nav-link" href="<c:url value="/post/list"/>">게시글 목록</a>
 			</li>
 		<c:if test="${user != null }">

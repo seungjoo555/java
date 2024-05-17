@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3단계 드롭다운 메뉴</title>
+<style>
+/* Dropdown Button */
+.dropbtn-lecture {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn-lecture:hover, .dropbtn-lecture:focus {
+  background-color: #3e8e41;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content-lecture {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content-lecture a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content-lecture a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown-lecture:hover .dropdown-content-lecture {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown-lecture:hover .dropbtn-lecture {
+  background-color: #3e8e41;
+}
+
+/* Submenu Button */
+.subbtn-lecture {
+  background-color: #f1f1f1;
+  color: black;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+/* Submenu Button on hover */
+.subbtn-lecture:hover {
+  background-color: #ddd;
+}
+
+/* Submenu Content (Hidden by Default) */
+.submenu-content-lecture {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* Show the submenu content on hover */
+.dropdown-submenu-lecture:hover .submenu-content-lecture {
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<div class="dropdown-lecture">
+  <a href="#" class="dropbtn-lecture">메뉴 1</a>
+  <div class="dropdown-content-lecture">
+    <div class="dropdown-submenu-lecture">
+      <a href="#" class="subbtn-lecture">서브메뉴 1</a>
+      <div class="submenu-content-lecture">
+        <a href="#">서브메뉴 항목 1-1</a>
+        <a href="#">서브메뉴 항목 1-2</a>
+      </div>
+    </div>
+    <div class="dropdown-submenu-lecture">
+      <a href="#" class="subbtn-lecture">서브메뉴 2</a>
+      <div class="submenu-content-lecture">
+        <a href="#">서브메뉴 항목 2-1</a>
+        <a href="#">서브메뉴 항목 2-2</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+

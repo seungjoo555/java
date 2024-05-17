@@ -34,4 +34,8 @@ public interface BoardService {
 	int recommend(RecommendVO recommend, MemberVO user);
 
 	int getUserRecommend(int num, MemberVO user);
+
+	String uploadImg(MultipartFile file);
+
+	void deleteImg(String file);
 }

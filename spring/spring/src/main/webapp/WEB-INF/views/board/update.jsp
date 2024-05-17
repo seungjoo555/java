@@ -30,16 +30,14 @@
 		<textarea class="form-control" id="bo_content" name="bo_content">${board.bo_content }</textarea>
 	</div>
 	<div class="form-group box-attachment">
-		<label>첨부파일(최대 3개)</label>
+		<label>첨부파일</label>
 		<c:forEach items="${fileList}" var="file">
 			<div class="form-control">
 				<span>${file.fi_ori_name }</span>
 				<a href="javascript:void(0);" class="btn-del" data-num="${file.fi_num}">&times;</a>
 			</div>
 		</c:forEach>
-		<c:forEach begin="1" end="${3 - fileList.size() }">
-			<input type="file" class="form-control" name="file">
-		</c:forEach>
+		<input type="file" class="form-control" name="file" multiple/>
 	</div>
 	<button class="btn btn-outline-success col-12">게시글 등록</button>
 </form>
@@ -73,8 +71,6 @@ $(".btn-del").click(function(){
 	let num = $(this).data("num");
 	//input hidden 삭제한 첨부파일 번호를 추가
 	$(this).parents(".box-attachment").prepend(`<input type="hidden" name="delNums" value="\${num}">`)
-	//input file을 추가
-	$(this).parents(".box-attachment").append(`<input type="file" class="form-control" name="file">`);	
 	//클릭한 x버튼의 첨부파일을 삭제
 	$(this).parent().remove();
 });
